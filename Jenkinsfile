@@ -10,11 +10,6 @@ pipeline {
             sh "mvn package spring-boot:repackage"
         }
     }
-    stage('Clean image'){
-        steps {
-            sh "docker rm $(docker stop $(docker ps -a -q --filter ancestor=example-service-time --format="{{.ID}}"))"
-        }
-    }
     stage('Build') {
         steps {
             sh "docker build -t example-service-time ."
